@@ -20,23 +20,60 @@ body {
   position: relative;
 }
 
-.globos {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  overflow: hidden;
+.name-list {
+  list-style-type: none;
+  padding-left: 0;
 }
 
-.globo {
-  width: 50px;
-  height: 70px;
+.name-list li {
+  text-align: left;
+  padding: 5px 0;
+}
+
+.globos {
+  width: 100%;
+  max-width: 400px;
   position: absolute;
-  bottom: 0;
-  animation: subir 4s ease-in-out infinite;
+  bottom: -100px; 
+  left: 50%;
+  transform: translateX(-50%);
+  opacity: 0;
+  animation: subir 2s ease-out forwards;
 }
 
 @keyframes subir {
-  0% { transform: translateY(0); opacity: 1; }
-  100% { transform: translateY(-100vh); opacity: 0; }
+  0% { transform: translate(-50%, 100px); opacity: 0; }
+  100% { transform: translate(-50%, 0); opacity: 1; }
+}
+
+
+button {
+  padding: 12px 24px;
+  font-size: 1.1rem;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
+  margin: 10px; 
+  background-color: #f39c12; 
+  color: white; 
+}
+
+button:hover {
+  background-color: #e67e22; 
+  transform: scale(1.05); 
+}
+
+button:disabled {
+  background-color: #bbb; 
+  cursor: not-allowed;
+}
+
+button + button {
+  margin-left: 15px; 
+}
+
+
+button:not(:last-child) {
+  margin-bottom: 15px;
 }

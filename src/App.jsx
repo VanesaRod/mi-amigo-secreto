@@ -2,21 +2,38 @@ import { useState } from "react";
 import Button from "./components/Button.jsx";
 import Result from "./components/Result.jsx";
 import NameList from "./components/NameList.jsx";
-import "./App.css";
+import './App.css';  
 
 function App() {
   const [nombres, setNombres] = useState([]);
   const [resultado, setResultado] = useState("");
   const [inputValue, setInputValue] = useState("");
 
+  // Función para agregar un nombre a la lista
   const agregarNombre = () => {
-    if (inputValue.trim() && nombres.length < 10 && !nombres.includes(inputValue)) {
-      setNombres([...nombres, inputValue.trim()]);
-      setInputValue(""); 
+    // Eliminar espacios al principio y al final
+    const nombre = inputValue.trim();
+
+    // Validación para asegurar que el campo no esté vacío
+    if (!nombre) {
+      alert("Por favor, inserte el nombre.");
+      return; // Si el campo está vacío, no se agrega el nombre
+    }
+
+    // Validación para asegurar que el nombre solo contiene letras y números
+    const nombreValido = /^[a-zA-Z0-9]+$/.test(nombre);
+    if (!nombreValido) {
+      alert("El nombre solo debe contener letras y números.");
+      return;
+    }
+
+    // Si el nombre es válido, se agrega a la lista
+    if (nombres.length < 10 && !nombres.includes(nombre)) {
+      setNombres([...nombres, nombre]);
+      setInputValue(""); // Limpiar el campo de texto después de agregar el nombre
     }
   };
 
-  
   const manejarEnter = (e) => {
     if (e.key === "Enter") {
       agregarNombre();
